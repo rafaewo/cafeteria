@@ -15,7 +15,6 @@ export default function Products({navigation}) {
         return () => { isMounted = false }
     });
 
-    
 
     var renderCard = ({item}) => {
         return (

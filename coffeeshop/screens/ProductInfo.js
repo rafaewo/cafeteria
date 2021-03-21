@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavigationContainer, TabRouter } from '@react-navigation/native';
+import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Info from './Info'
@@ -27,6 +27,7 @@ export default function ProductInfo(props) {
       <Tab.Navigator>
         <Tab.Screen
           options={{
+            title: 'Informação do Método',
             tabBarIcon: ({ color, size }) => <Ionicons name='information-circle-outline' size={size} color={color} />
           }}
           name="Info"
@@ -35,6 +36,7 @@ export default function ProductInfo(props) {
         </Tab.Screen>
         <Tab.Screen 
           options={{
+            title: 'Comentários',
             tabBarIcon: ({ color, size }) => <Ionicons name='chatbox-ellipses-outline' size={size} color={color} />
           }}
           name="Comments"
