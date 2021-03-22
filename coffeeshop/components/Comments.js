@@ -2,7 +2,7 @@ import * as React from "react";
 import { Text, View, Image, FlatList } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 
-export default function Info(props) {
+export default function Comments(props) {
     
     var renderCard = ({item}) => {
 

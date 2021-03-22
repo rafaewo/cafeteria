@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
-import Info from './Info'
-import Comments from './Comments'
+import Info from '../components/Info'
+import Comments from '../components/Comments'
 import { getProduto } from '../service/Produtos'
 
 const Tab = createBottomTabNavigator();
