@@ -4,7 +4,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Ionicons from 'react-native-vector-icons/Ionicons';
 import Info from '../components/Info'
 import Comments from '../components/Comments'
-import { getProduto } from '../service/Produtos'
+import axios from 'axios'
 
 const Tab = createBottomTabNavigator();
 
@@ -12,14 +12,13 @@ export default function ProductInfo(props) {
   const [produto, setProduto] = useState({});
 
   useEffect(() => {
-    let isMounted = true;
-    async function loadContent() {
-      const produto = await getProduto(props.route.params.info.id)
-      if (isMounted) setProduto(produto)
+    var getProduto = async (id) => {
+      const response = await axios.get('http://192.168.0.79:3031/produtos/' + id);
+      setProduto(response.data);
     }
-    loadContent()
-    return () => { isMounted = false }
-  });
+    getProduto(props.route.params.info.id)
+    console.log('uma vez')
+  },[]);
   
   return (
     <NavigationContainer independent={true}>

@@ -1,19 +1,18 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Button, View, Text, Image, FlatList } from 'react-native';
-import { getProdutos } from '../service/Produtos'
+import axios from 'axios';
 
 export default function Products({navigation}) {
     const [produtos, setProdutos] = useState({});
 
     useEffect(() => {
-        let isMounted = true;
-        async function loadContent() {
-            const produtos = await getProdutos()
-            if (isMounted) setProdutos(produtos)
+        var getProdutos = async () => {
+            const response = await axios.get('http://192.168.0.79:3031/produtos');
+            setProdutos(response.data)
         }
-        loadContent()
-        return () => { isMounted = false }
-    });
+        getProdutos()
+        console.log('rodou')
+    },[]);
 
 
     var renderCard = ({item}) => {
