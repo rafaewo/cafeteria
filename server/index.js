@@ -2,7 +2,9 @@ const express = require('express');
 const app = express();
 const port = 3031;
 
-const produtos = [
+app.use(express.json())
+
+var produtos = [
     {
         id: '1',
         preco: 'R$64,90',
@@ -129,15 +131,42 @@ app.get('/', (req, res) => {
     res.send('Hello World!!!');
 })
   
+// GET TODOS OS PRODUTOS
 app.get('/produtos', (req, res) => {
     res.send(produtos);
 })
   
+// GET PRODUTO ESPECÍFICO
 app.get('/produtos/:id', (req, res) => {
     const produto = produtos.filter((produto) => produto.id == req.params.id);
     res.send(produto[0]);
 });
-  
+
+app.get('/produtos/:id/comentarios', (req,res) => {
+    const produto = produtos.filter((produto) => produto.id == req.params.id)
+    res.send(produto[0].comentarios)
+})
+
+// POSTANDO UM COMENTÁRIO
+app.post('/produto/:id/comentario', (req,res) => {
+    const newComment = req.body
+    const produto = produtos.filter((produto) => produto.id == req.params.id)
+
+    newComment.uid = produto[0].comentarios.length+1
+    produto[0].comentarios.push(newComment)
+
+    res.sendStatus(200)
+})
+
+// DELETANDO UM COMENTÁRIO
+app.delete('/produto/:id/comentario/:idcomentario', (req,res) => {
+    const produto = produtos.filter((produto) => produto.id == req.params.id)
+    //var comentarios = produto[0].comentarios
+
+    produto[0].comentarios = produto[0].comentarios.filter((comentario) => comentario.uid != req.params.idcomentario)
+    res.sendStatus(200)
+})
+
 app.listen(port, '0.0.0.0', () => {
     console.log('Servidor online');
 });
