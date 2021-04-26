@@ -1,17 +1,28 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Button, View, Text, Image, FlatList } from 'react-native';
 import axios from 'axios';
+import {
+    AdMobRewarded,
+    setTestDeviceIDAsync,
+  } from 'expo-ads-admob';
 
 export default function Products({navigation}) {
     const [produtos, setProdutos] = useState({});
 
     useEffect(() => {
+        async function rodarAD () {
+            await setTestDeviceIDAsync('EMULATOR');
+            // Display a rewarded ad
+            await AdMobRewarded.setAdUnitID('ca-app-pub-3940256099942544/5224354917'); // Test ID, Replace with your-admob-unit-id
+            await AdMobRewarded.requestAdAsync();
+            await AdMobRewarded.showAdAsync();
+        }
         var getProdutos = async () => {
             const response = await axios.get('http://192.168.0.79:3031/produtos');
             setProdutos(response.data)
         }
         getProdutos()
-        console.log('rodou')
+        rodarAD()
     },[]);
 
 

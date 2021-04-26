@@ -8,6 +8,7 @@ export default function AddComment(props) {
     const productId = props.route.params.id
     
     var postComment = async(comentario) => {  
+        console.log('postou')
         const response = await axios.post(`http://192.168.0.79:3031/produto/${productId}/comentario`, comentario)
         return response.data
     }

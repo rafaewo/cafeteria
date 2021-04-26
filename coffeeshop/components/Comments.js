@@ -15,7 +15,7 @@ export default function Comments(props) {
     })
 
     const deleteComment = async (id, idcomment) => {
-        console.log('clicou')
+        console.log('deletou')
         const response = await axios.delete(`http://192.168.0.79:3031/produto/${id}/comentario/${idcomment}`)
         return response.data
     }
